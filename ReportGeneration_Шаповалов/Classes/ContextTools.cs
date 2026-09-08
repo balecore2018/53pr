@@ -21,6 +21,18 @@ namespace ReportGeneration_Шаповалов.Classes
             return new DataTable();
         }
 
+        public static DataTable Select(string sql)
+        {
+            try
+            {
+                return Connection.Select(sql);
+            }
+            catch
+            {
+                return new DataTable();
+            }
+        }
+
         public static int IntValue(DataRow row, params string[] names)
         {
             object? value = Value(row, names);

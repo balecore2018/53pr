@@ -7,14 +7,15 @@ namespace ReportGeneration_Шаповалов.Classes
     {
         public List<Discipline> AllDisciplines()
         {
-            DataTable table = ContextTools.LoadFirst("discipline", "disciplines");
+            DataTable table = ContextTools.Select("SELECT * FROM `Discipline` WHERE `IsVisible` = 1 ORDER BY `Name`");
             List<Discipline> disciplines = new List<Discipline>();
 
             foreach (DataRow row in table.Rows)
             {
                 disciplines.Add(new Discipline(
-                    ContextTools.IntValue(row, "id", "id_discipline", "discipline_id"),
-                    ContextTools.StringValue(row, "name", "title", "discipline")));
+                    ContextTools.IntValue(row, "Id"),
+                    ContextTools.IntValue(row, "IdGroup"),
+                    ContextTools.StringValue(row, "Name")));
             }
 
             return disciplines;

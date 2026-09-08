@@ -23,10 +23,13 @@
                 BorderThickness="1"
                 CornerRadius="6">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="220" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ComboBox x:Name="Groups"
@@ -38,14 +41,18 @@
                 <TextBox x:Name="Search"
                          Grid.Column="1"
                          Height="34"
-                         Margin="12,0"
+                         Margin="12,0,0,0"
                          Padding="8,5"
                          VerticalContentAlignment="Center"
+                         ToolTip="Поиск по ФИО"
                          TextChanged="SelectStudents" />
 
-                <Button Grid.Column="2"
+                <Button Grid.Row="1"
+                        Grid.ColumnSpan="2"
                         Height="34"
-                        MinWidth="150"
+                        Width="190"
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Right"
                         Padding="14,0"
                         Click="ReportGeneration"
                         Content="Сформировать Excel" />
@@ -54,7 +61,12 @@
 
         <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="Parent" />
+            <StackPanel>
+                <TextBlock x:Name="StatusText"
+                           Margin="0,0,0,12"
+                           Foreground="#475569" />
+                <StackPanel x:Name="Parent" />
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>

@@ -7,17 +7,17 @@ namespace ReportGeneration_Шаповалов.Classes
     {
         public List<Evaluation> AllEvaluations()
         {
-            DataTable table = ContextTools.LoadFirst("evaluation", "evaluations", "mark", "marks");
+            DataTable table = ContextTools.Select("SELECT * FROM `Evaluation`");
             List<Evaluation> evaluations = new List<Evaluation>();
 
             foreach (DataRow row in table.Rows)
             {
                 evaluations.Add(new Evaluation(
-                    ContextTools.IntValue(row, "id", "id_evaluation", "evaluation_id"),
-                    ContextTools.IntValue(row, "student_id", "id_student"),
-                    ContextTools.IntValue(row, "work_id", "id_work"),
-                    ContextTools.IntValue(row, "value", "mark", "grade", "evaluation"),
-                    ContextTools.BoolValue(row, "is_visited", "visited", "attendance", "is_attended")));
+                    ContextTools.IntValue(row, "Id"),
+                    ContextTools.IntValue(row, "IdStudent"),
+                    ContextTools.IntValue(row, "IdWork"),
+                    ContextTools.StringValue(row, "Value"),
+                    ContextTools.StringValue(row, "Lateness")));
             }
 
             return evaluations;

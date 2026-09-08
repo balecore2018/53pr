@@ -7,17 +7,18 @@ namespace ReportGeneration_Шаповалов.Classes
     {
         public List<Student> AllStudents()
         {
-            DataTable table = ContextTools.LoadFirst("student", "students");
+            DataTable table = ContextTools.Select("SELECT * FROM `Student` ORDER BY `LastName`, `FirstName`");
             List<Student> students = new List<Student>();
 
             foreach (DataRow row in table.Rows)
             {
                 students.Add(new Student(
-                    ContextTools.IntValue(row, "id", "id_student", "student_id"),
-                    ContextTools.IntValue(row, "group_id", "id_group"),
-                    ContextTools.StringValue(row, "surname", "last_name", "family"),
-                    ContextTools.StringValue(row, "name", "first_name"),
-                    ContextTools.StringValue(row, "patronymic", "middle_name")));
+                    ContextTools.IntValue(row, "Id"),
+                    ContextTools.IntValue(row, "IdGroup"),
+                    ContextTools.StringValue(row, "LastName"),
+                    ContextTools.StringValue(row, "FirstName"),
+                    string.Empty,
+                    ContextTools.BoolValue(row, "Expelled")));
             }
 
             return students;

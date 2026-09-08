@@ -7,16 +7,16 @@ namespace ReportGeneration_Шаповалов.Classes
     {
         public List<Work> AllWorks()
         {
-            DataTable table = ContextTools.LoadFirst("work", "works");
+            DataTable table = ContextTools.Select("SELECT * FROM `Work` WHERE IFNULL(`Blocked`, 0) = 0 ORDER BY `Date`, `Name`");
             List<Work> works = new List<Work>();
 
             foreach (DataRow row in table.Rows)
             {
                 works.Add(new Work(
-                    ContextTools.IntValue(row, "id", "id_work", "work_id"),
-                    ContextTools.IntValue(row, "discipline_id", "id_discipline"),
-                    ContextTools.StringValue(row, "name", "title", "topic", "work"),
-                    ContextTools.DateValue(row, "date", "work_date")));
+                    ContextTools.IntValue(row, "Id"),
+                    ContextTools.IntValue(row, "IdDiscipline"),
+                    ContextTools.StringValue(row, "Name"),
+                    ContextTools.DateValue(row, "Date")));
             }
 
             return works;
