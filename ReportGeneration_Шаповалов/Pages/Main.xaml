@@ -1,0 +1,60 @@
+<Page x:Class="ReportGeneration_Шаповалов.Pages.Main"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Main"
+      Background="#f4f7fb">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Успеваемость студентов"
+                   FontSize="24"
+                   FontWeight="SemiBold"
+                   Foreground="#1f2937" />
+
+        <Border Grid.Row="1"
+                Margin="0,18,0,18"
+                Padding="16"
+                Background="White"
+                BorderBrush="#d9e2ec"
+                BorderThickness="1"
+                CornerRadius="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="Groups"
+                          Height="34"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Id"
+                          SelectionChanged="SelectGroup" />
+
+                <TextBox x:Name="Search"
+                         Grid.Column="1"
+                         Height="34"
+                         Margin="12,0"
+                         Padding="8,5"
+                         VerticalContentAlignment="Center"
+                         TextChanged="SelectStudents" />
+
+                <Button Grid.Column="2"
+                        Height="34"
+                        MinWidth="150"
+                        Padding="14,0"
+                        Click="ReportGeneration"
+                        Content="Сформировать Excel" />
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="Parent" />
+        </ScrollViewer>
+    </Grid>
+</Page>
